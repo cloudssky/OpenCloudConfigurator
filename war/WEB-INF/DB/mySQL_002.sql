@@ -1,0 +1,1 @@
+ALTER TABLE registration ADD firmaname VARCHAR(30) AFTER lastname;

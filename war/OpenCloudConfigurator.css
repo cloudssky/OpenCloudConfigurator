@@ -1,0 +1,206 @@
+/* Add css rules here for your application. */
+h1 {
+	font-size: 2em;
+	font-weight: bold;
+	color: #777777;
+	margin: 40px 0px 70px;
+	text-align: center;
+}
+
+.sendButton {
+	display: block;
+	font-size: 36pt;
+}
+
+/** Most GWT widgets already have a style name defined */
+.gwt-DialogBox {
+	width: 400px;
+}
+
+.dialogVPanel {
+	margin: 5px;
+}
+
+.serverResponseLabelError {
+	color: red;
+}
+
+.gwt-Button {
+	marging: 5px 50px;
+	width: 100px;
+}
+
+.gwt-SliderBar-shell {
+	-moz-border-bottom-colors: none;
+	-moz-border-image: none;
+	-moz-border-left-colors: none;
+	-moz-border-right-colors: none;
+	-moz-border-top-colors: none;
+	background-color: #EFEBE7;
+	border-color: #FAF9F7 #848280 #848280 #FAF9F7;
+	border-style: solid;
+	border-width: 2px;
+	height: 34pt;
+	/*	marging: 30px 0;*/
+	width: 80%; /*breite des SliderBar*/
+}
+
+.gwt-SliderBar-shell .gwt-SliderBar-line {
+	background-color: white;
+	border: 1px solid black;
+	height: 4px;
+	overflow: hidden;
+	top: 22pt;
+	width: 95%; /*breite der Strichlinie in SliderBar*/
+}
+
+.gwt-SliderBar-shell .gwt-SliderBar-knob {
+	cursor: pointer;
+	height: 21px;
+	top: 14pt;
+	width: 11px;
+	z-index: 1;
+}
+
+.gwt-SliderBar-shell .gwt-SliderBar-tick {
+	background: none repeat scroll 0 0 black;
+	height: 8pt;
+	overflow: hidden;
+	top: 12pt;
+	width: 1px;
+}
+
+.gwt-SliderBar-shell .gwt-SliderBar-label {
+	cursor: default;
+	font-size: 8pt;
+	top: 2pt;
+}
+
+.gwt-SliderBar-shell-focused {
+	
+}
+
+.gwt-SliderBar-shell .gwt-SliderBar-line-sliding {
+	background-color: #DDDDDD;
+	cursor: pointer;
+}
+
+.gwt-Label {
+	float: left;
+	width: 130px;
+	text-align: center;
+	margin: 0px 0 2px 0px;
+	background: #0fff05;
+}
+
+.clear {
+	clear: both;
+}
+
+.change {
+	margin: 10px 0 15px 300px;
+}
+
+.text {
+	margin: 5px 0 10px 39px;
+	background: #C8C8C8;
+}
+
+.gwt-Label-Login {
+	color: navy;
+	font-size: 14px;
+	font-style: normal;
+	font-family: Arial;
+	font-weight: bold;
+	text-decoration: blink;
+}
+/*CloudSizer*/
+.gridSizer {
+	marging: 20px;
+	background: #EEE;
+}
+/*CloudSizer in Registration*/
+.regDialog {
+	margin-top: 1em;
+	margin-left: 1em;
+	margin-right: 1em;
+}
+
+/*CloudSizerData Text*/
+.regCloudDataAll {
+	width: 360px;
+}
+/*Formatierung fuer personliche Daten*/
+.daten {
+	margin: 2px 5px 10px 15px;
+	float: left;
+	width: 140px;
+	background: #EEF;
+	display: block;
+	padding-left: 15px;
+	padding-bottom: 10px;
+}
+/*Formatierung fuer Adresse*/
+.adress {
+	float: left;
+	display: block;
+	width: 140px;
+	margin: 2px 5px 10px 10px;
+	padding-left: 15px;
+	background: #EEF;
+	padding-bottom: 10px;
+}
+/*vertikalle Abstaende zwischen Eingabefelder fuer personliche Daten*/
+.form1 {
+	padding-top: 5px;
+}
+/*vertikalle Abstaende zwischen Eingabefelder fuer Adresse*/
+.form2 {
+	padding-top: 5px;
+}
+
+/*Popup Fenster mit Bestaetigung*/
+.popup {
+	margin-top: 1em;
+	margin-left: 1em;
+	width: 300px;
+	height: 100px;
+}
+
+.popupButton {
+	width: 70px;
+	height: 25px;
+	margin-left: 109px;
+	margin-top: 30px;
+	background: #E1EFBB;
+}
+
+#start {
+	padding: 5px 50px;
+}
+/*Titel und Kontainer Konfiguration*/
+.regCloudSizerTitel {
+	background: #C8C8C8;
+	width: 650px;
+}
+/*CloudSizerDataText und -Value wie z.B. cpuText und -Value ,usw*/
+.regCloudSizerDataText {
+	margin-left: 5px;
+	padding-left: 5px;
+	text-align: center;
+	margin-left: 5px;
+}
+
+.submitButton {
+	margin: 15px 0 0 190px;
+	width: 120px;
+}
+
+.smallText {
+	font-size: 10px;
+}
+
+#logoText {
+	margin: 20px 0 0 20px;
+	font-size: 40px;
+}
