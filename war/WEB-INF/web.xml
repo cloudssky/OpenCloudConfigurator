@@ -17,7 +17,7 @@
 		by calling serve(String).with(Class<? extends HttpServlet>) and filter(String).through(Class<? 
 		extends Filter) -->
 	<listener>
-		<listener-class>org.opencms.occ.server.guice.GuiceServletConfig</listener-class>
+		<listener-class>org.opencmp.occ.server.guice.GuiceServletConfig</listener-class>
 	</listener>
 
 	<filter>

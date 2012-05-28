@@ -1,0 +1,28 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui' 
+	
+	ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+	ui:generateKeys='com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator'
+	ui:generateLocales='default' xmlns:s="urn:import:org.opencmp.occ.client.cloudservice.slider">
+
+	<g:HTMLPanel>
+	<h2>Cloudseite</h2>
+		<hr/>
+		<g:Label text="waehle dein CloudService" ui:field="textLabel"/>
+		<hr/>
+		<!--  s:SliderBar ui:field="sliderBar"/--><!-- Hier knallt -->
+		
+		<g:Label text="CPU-Anzahl" ui:field="cloudLabel"/>
+		<g:TextBox text="1" ui:field="cloudValue" readOnly="true"/>
+		<g:Label text="Speicherkapazität(in MB)" ui:field="ramLabel"/>
+		<g:TextBox text="512" ui:field="ramValue" readOnly="true"/>
+		<g:Label text="HDD-Speicher(in GB)" ui:field="hddLabel"/>
+		<g:TextBox text="20GB" ui:field="hddValue" readOnly="true"/>
+		<g:Label text="Preis pro Monat(in Euro)" ui:field="priceLabel"/>
+		<g:TextBox text="14,99" ui:field="priceValue" readOnly="true"/>
+		<g:Label text="" ui:field="errorLabel"/>
+		<g:Button text= "Weiter(Registrieren)" ui:field="registrButton"/>
+	</g:HTMLPanel>
+</ui:UiBinder>
