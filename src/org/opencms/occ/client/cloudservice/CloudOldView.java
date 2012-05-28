@@ -76,8 +76,8 @@ public class CloudOldView extends ViewImpl implements CloudOldPresenter.MyView {
 		locate = new RadioButton("country", "Europe");
 		locate.setChecked(true);// Punkt auf Germany setzen
 		locate2 = new RadioButton("country", "US North");
-		locate3 = new RadioButton("country", "Japan");
-		locate4 = new RadioButton("country", "Dubai");
+		locate3 = new RadioButton("country", "Middle East");
+		locate4 = new RadioButton("country", "Asia Pacific");
 		// errorLabel = new Label();
 		registrationButton = new Button("Next");
 		registrationButton.setTitle("go");
@@ -164,7 +164,23 @@ public class CloudOldView extends ViewImpl implements CloudOldPresenter.MyView {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				countryLocation = "other";
+				countryLocation = "US North";
+
+			}
+		});
+		locate3.addClickHandler(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent event) {
+				countryLocation = "Middle East";
+
+			}
+		});
+		locate4.addClickHandler(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent event) {
+				countryLocation = "Asia Pacific";
 
 			}
 		});
