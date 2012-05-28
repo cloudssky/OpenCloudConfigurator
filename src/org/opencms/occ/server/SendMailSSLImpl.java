@@ -29,7 +29,7 @@ public class SendMailSSLImpl extends RemoteServiceServlet implements MailService
 
 	final static String fromAddress = "noreply@cloudssky.com";// sender
 	final static String login = "noreply@cloudssky.com";
-	final static String pwd = "!noreply%";
+	final static String pwd = "secret";
 	final static String toAddressSupport = "servicebot@cloudssky.com";// empfaenger Support
 //	final static String ccAddressSupport = "second@xyz.com";// empfaenger Support
 																
