@@ -19,7 +19,8 @@ public class OpenCloudConfigurator implements EntryPoint, ValueChangeHandler<Str
 
 	private final ClientGinjector ginjector = GWT.create(ClientGinjector.class);
 //	  private final SessionId sessionId = new SessionId();
-
+	//test
+	//test
 	
 	@Override
 	public void onModuleLoad() {
