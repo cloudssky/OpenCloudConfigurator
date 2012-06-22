@@ -1,5 +1,9 @@
 package org.opencmp.occ.server;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Date;
 import java.util.Properties;
 
@@ -15,6 +19,7 @@ import org.opencmp.occ.client.cloudservice.mailsend.MailService;
 import org.opencmp.occ.client.cloudservice.registration.action.CloudUserData;
 import org.opencmp.occ.shared.MailObject;
 
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 
@@ -27,10 +32,10 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 @SuppressWarnings("serial")
 public class SendMailSSLImpl extends RemoteServiceServlet implements MailService {
 
-	final static String fromAddress = "noreply@cloudssky.com";// sender
-	final static String login = "noreply@cloudssky.com";
-	final static String pwd = "secret";
-	final static String toAddressSupport = "servicebot@cloudssky.com";// empfaenger Support
+	String fromAddress;
+	String login;
+	String pwd;
+	String toAddressSupport;
 //	final static String ccAddressSupport = "second@xyz.com";// empfaenger Support
 																
 	final static String port = "465";
@@ -39,7 +44,8 @@ public class SendMailSSLImpl extends RemoteServiceServlet implements MailService
 
 	private MailObject mailObjectSupport;
 	private MailObject mailObjectNewUser;
-
+	
+	
 	/**
 	 * Diese Methode versendet eine E-Mail an Support mit angegebenem
 	 * Benutzerdaten
@@ -51,7 +57,7 @@ public class SendMailSSLImpl extends RemoteServiceServlet implements MailService
 		props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.port", port);
-
+		readContactFile();
 		setEmailDataSupport();
 		Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
@@ -126,6 +132,30 @@ public class SendMailSSLImpl extends RemoteServiceServlet implements MailService
 //		}
 //		return false;
 //	}
+	
+	/**
+	 * Diese Methode liest notwendige Daten(fromAddress; login; pwd; toAddressSupport) aus contact.property-Datei. 
+	 */
+	private void readContactFile(){
+		Properties prop = new Properties();
+		try {
+			prop.load(new FileInputStream("properties/contact.properties"));
+			fromAddress = prop.getProperty("fromAddress");
+			System.out.println("fromAddress= " + fromAddress);
+			login = prop.getProperty("login");
+			System.out.println("login= " + login);
+			pwd = prop.getProperty("pwd");
+			System.out.println("pwd= " + pwd);
+			toAddressSupport = prop.getProperty("toAddressSupport");
+			System.out.println("toAddressSupport= " + toAddressSupport);
+		} catch (FileNotFoundException e) {
+			Window.alert("contact.properties file not found.");
+			e.printStackTrace();
+		} catch (IOException e) {
+			Window.alert("Problem with readContactFile method");
+			e.printStackTrace();
+		} 
+	}
 
 	/**
 	 * Es werden vordefinierte Daten fuer E-Mailversendung an Support gesetzt.
