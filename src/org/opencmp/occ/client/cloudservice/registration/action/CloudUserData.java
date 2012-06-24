@@ -7,7 +7,7 @@ import com.gwtplatform.dispatch.shared.ActionImpl;
 
 /**
  * Diese Klasse stellt ein Objekt mit CloudUserData(Name, Nachname, Firmaname, E-Mail, PWD, Strasse,
- * Hausnum., PLZ und Stadt) und CloudSizer(CPU, RAM, HDD, Location und Preis) zusammen.
+ * Hausnum., PLZ und Stadt) und CloudSizer(CPU, RAM, HDD, Location, Cloud Apps und Preis) zusammen.
  * This class represents an object with CloudUser data (name, last name, company name, e-mail, PWD, street,
  * House num., Postal code and city) and CloudSizer (CPU, RAM, HDD, location and cost) together.
  * 
@@ -44,28 +44,6 @@ public class CloudUserData extends ActionImpl<CloudUserDataResult> {
 	public boolean isSecured() {
 		return false;
 	}
-
-//	public CloudUserData(/* String cloudValue */CloudSizerData cloudSizerData, String name, String lastName, String firmaName, String email, String password, String street, String house, String post, String city) {
-//		// super();//TODO ob es notwendig??
-//		// this.cloudValue = cloudValue;
-//		this.cloudSizerData = cloudSizerData;
-//		this.name = name;
-//		this.lastName = lastName;
-//		this.firmaName = firmaName;
-//		this.email = email;
-//		this.password = password;
-//		this.street = street;
-//		this.house = house;
-//		this.post = post;
-//		this.city = city;
-//	}
-
-	// /**
-	// * @return the cloudValue
-	// */
-	// public String getCloudValue() {
-	// return cloudValue;
-	// }
 
 	/**
 	 * @return the cloudSizerData

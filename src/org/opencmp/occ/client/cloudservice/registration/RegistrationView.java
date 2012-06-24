@@ -33,6 +33,9 @@ public class RegistrationView extends ViewImpl implements RegistrationPresenter.
 	@UiField
 	Label locationLabel;
 	@UiField
+	Label cloudAppsLabel;
+
+	@UiField
 	Button changeButton;
 
 	@UiField
@@ -111,6 +114,13 @@ public class RegistrationView extends ViewImpl implements RegistrationPresenter.
 	 */
 	public Label getLocationLabel() {
 		return locationLabel;
+	}
+	
+	/**
+	 * @return the cloudAppsLabel
+	 */
+	public Label getCloudAppsLabel() {
+		return cloudAppsLabel;
 	}
 
 	/**
@@ -250,6 +260,7 @@ public class RegistrationView extends ViewImpl implements RegistrationPresenter.
 		cloudSizerData.setHddSize(hddLabel.getText());
 		cloudSizerData.setPriceSize(priceLabel.getText());
 		cloudSizerData.setCloudLocation(locationLabel.getText());
+		cloudSizerData.setCloudApps(cloudAppsLabel.getText());
 		return cloudSizerData;
 	}
 

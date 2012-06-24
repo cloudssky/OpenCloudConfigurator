@@ -16,5 +16,6 @@
 	<classpathentry exported="true" kind="lib" path="war/WEB-INF/lib/gwt-validation-2.0.jar"/>
 	<classpathentry exported="true" kind="lib" path="war/WEB-INF/lib/gwtent.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/gwt-slider-bar-1.0.jar"/>
+	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

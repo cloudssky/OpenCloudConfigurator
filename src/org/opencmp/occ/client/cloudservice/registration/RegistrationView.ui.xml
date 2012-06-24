@@ -18,6 +18,7 @@
 				<g:Label text="Storage(in GB)"/>
 				<g:Label text="Monthly Price(in €)*"  />
 				<g:Label text="Server-Region"  />
+				<g:Label text="Cloud Apps"	/>
 			</div>
 			<div class="clear"></div>
 			<div class=".regCloudSizerDataText" styleName=".regCloudSizerDataText">
@@ -26,8 +27,9 @@
 				<g:Label ui:field="hddLabel" />
 				<g:Label ui:field="priceLabel"  />
 				<g:Label ui:field="locationLabel"  />
+				<g:Label ui:field="cloudAppsLabel"/>
 			</div>
-			<g:Label text="* Free 30-day Trial" styleName="smallText"/>
+			<g:Label text="* Free 30-day Trial" styleName="smallText" width="200px"/>
 			<div class="clear"></div>
 			<g:Button  title="Wenn du dein OpenCloudConfigurator ändern willst" text="Change" ui:field="changeButton" styleName="change" />
 		</div>

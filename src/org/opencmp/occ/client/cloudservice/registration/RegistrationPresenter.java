@@ -41,6 +41,7 @@ public class RegistrationPresenter extends
 	private String hdd = "";
 	private String price = "";
 	private String location = "";
+	private String cloudApps = "";
 	// private EMailValidator emailValidator;
 	// private PasswordValidator pwdValidator;
 	private final String EMAIL_PATTERN = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
@@ -60,6 +61,8 @@ public class RegistrationPresenter extends
 		public Label getPriceLabel();
 
 		public Label getLocationLabel();
+		
+		public Label getCloudAppsLabel();
 
 		public Button getKorrektButton();
 
@@ -119,7 +122,7 @@ public class RegistrationPresenter extends
 													// gesetzt
 		getView().getLocationLabel().setText(location);// hier wird location
 														// parameter gesetzt
-
+		getView().getCloudAppsLabel().setText(cloudApps);// hier wird cloudApps parameter gesetzt
 		// Es wird ein back'er-Button implementiert
 		getView().getChangeButton().addClickHandler(new ClickHandler() {
 
@@ -202,6 +205,7 @@ public class RegistrationPresenter extends
 		hdd = request.getParameter("hdd", hdd);
 		price = request.getParameter("price", price);
 		location = request.getParameter("location", location);
+		cloudApps = request.getParameter("cloudApps", cloudApps);
 	}
 
 	/**

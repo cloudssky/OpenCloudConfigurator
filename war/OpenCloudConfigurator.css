@@ -90,7 +90,7 @@ h1 {
 	width: 130px;
 	text-align: center;
 	margin: 0px 0 2px 0px;
-	background: #0fff05;
+	background: #a0d3de;
 }
 
 .clear {
@@ -98,7 +98,7 @@ h1 {
 }
 
 .change {
-	margin: 10px 0 15px 300px;
+	margin: 10px 0 15px 350px;
 }
 
 .text {
@@ -181,7 +181,7 @@ h1 {
 /*Titel und Kontainer Konfiguration*/
 .regCloudSizerTitel {
 	background: #C8C8C8;
-	width: 650px;
+	width: 780px;
 }
 /*CloudSizerDataText und -Value wie z.B. cpuText und -Value ,usw*/
 .regCloudSizerDataText {

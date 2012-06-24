@@ -70,7 +70,7 @@ public class CloudOldPresenter extends Presenter<CloudOldPresenter.MyView, Cloud
 
 					// Es werden ausgewaehlte CloudSizerData auf die naechste
 					// Seite als Parameter uebergeben
-					PlaceRequest request = new PlaceRequest(NameTokens.registration).with("cpu", getView().getCloudSizerData().getCpuSize()).with("ram", getView().getCloudSizerData().getRamSize()).with("hdd", getView().getCloudSizerData().getHddSize()).with("price", getView().getCloudSizerData().getPriceSize()).with("location", getView().getCloudSizerData().getCloudLocation());
+					PlaceRequest request = new PlaceRequest(NameTokens.registration).with("cpu", getView().getCloudSizerData().getCpuSize()).with("ram", getView().getCloudSizerData().getRamSize()).with("hdd", getView().getCloudSizerData().getHddSize()).with("price", getView().getCloudSizerData().getPriceSize()).with("location", getView().getCloudSizerData().getCloudLocation()).with("cloudApps", getView().getCloudSizerData().getCloudApps());
 					placeManager.revealPlace(request);
 				}
 			});

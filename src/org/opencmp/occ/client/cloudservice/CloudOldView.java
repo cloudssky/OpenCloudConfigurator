@@ -3,6 +3,8 @@ package org.opencmp.occ.client.cloudservice;
 import org.opencmp.occ.client.cloudservice.slider.SliderBar;
 import org.opencmp.occ.client.cloudservice.slider.SliderBar.LabelFormatter;
 
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
@@ -10,6 +12,7 @@ import com.google.gwt.user.client.ui.ChangeListener;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -41,6 +44,10 @@ public class CloudOldView extends ViewImpl implements CloudOldPresenter.MyView {
 	final RadioButton locate3;
 	final RadioButton locate4;
 	String countryLocation = "Germany";
+	final ListBox cloudAppsListBox;	
+	
+	
+	
 	CloudSizerData cloudSizer;
 
 	private final Button registrationButton;
@@ -78,6 +85,22 @@ public class CloudOldView extends ViewImpl implements CloudOldPresenter.MyView {
 		locate2 = new RadioButton("country", "US North");
 		locate3 = new RadioButton("country", "Middle East");
 		locate4 = new RadioButton("country", "Asia Pacific");
+		cloudAppsListBox = new ListBox(false);
+		cloudAppsListBox.addItem("- not selected -");
+		cloudAppsListBox.addItem("Alfresco");
+		cloudAppsListBox.addItem("OpenCms");
+		cloudAppsListBox.addItem("Zimbra");
+		//appListbox.setSelectedIndex(0);
+	    // anzahl der sichbaren Elementen
+//		appListbox.setVisibleItemCount(5);
+		cloudAppsListBox.addChangeHandler(new ChangeHandler() {
+			  @Override
+		      public void onChange(ChangeEvent event) {
+				  cloudAppsListBox.setSelectedIndex(cloudAppsListBox.getSelectedIndex());
+		      }
+
+		});
+	    
 		// errorLabel = new Label();
 		registrationButton = new Button("Next");
 		registrationButton.setTitle("go");
@@ -118,7 +141,7 @@ public class CloudOldView extends ViewImpl implements CloudOldPresenter.MyView {
 		// html = html + "<div id=\"supertest\"> <h2> bla </h2> ";
 		VerticalPanel vpanel = new VerticalPanel();
 		// Place everything in a nice looking grid
-		Grid grid = new Grid(2, 5);
+		Grid grid = new Grid(2, 6);
 		grid.setStyleName("gridSizer");
 		grid.setBorderWidth(1);
 		grid.setCellPadding(3);
@@ -191,7 +214,9 @@ public class CloudOldView extends ViewImpl implements CloudOldPresenter.MyView {
 		panelLocation.add(locate3);
 		panelLocation.add(locate4);
 		grid.setWidget(1, 4, panelLocation);
-
+		//fuegen von CloudApps-Elementen(Liste)
+		grid.setHTML(0, 5, "Cloud Apps");
+		grid.setWidget(1, 5, cloudAppsListBox);
 		// Add elements to page
 		// panel.add(mainSliderBar, "mainSliderBar");
 		// mainSliderBar.setStyleName("supertest");
@@ -258,7 +283,7 @@ public class CloudOldView extends ViewImpl implements CloudOldPresenter.MyView {
 	// }
 
 	/**
-	 * Wird ein CloudSizer mit Daten(cpu, ram, hdd, price, location) gefuehlt
+	 * Wird ein CloudSizer mit Daten(cpu, ram, hdd, price, location, cloudAppList) gefuehlt
 	 * 
 	 * @return the cloudSizerData
 	 */
@@ -270,6 +295,8 @@ public class CloudOldView extends ViewImpl implements CloudOldPresenter.MyView {
 		cloudSizer.setPriceSize(priceBox.getValue());
 		// cloudSizer.setCloudLocation(getCountryLocation());
 		cloudSizer.setCloudLocation(countryLocation);
+		//gibt zurueck nur ausgewaelte Element
+		cloudSizer.setCloudApps(cloudAppsListBox.getItemText(cloudAppsListBox.getSelectedIndex())); 
 		return cloudSizer;
 	}
 

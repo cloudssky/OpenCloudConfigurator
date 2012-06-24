@@ -141,13 +141,9 @@ public class SendMailSSLImpl extends RemoteServiceServlet implements MailService
 		try {
 			prop.load(new FileInputStream("properties/contact.properties"));
 			fromAddress = prop.getProperty("fromAddress");
-			System.out.println("fromAddress= " + fromAddress);
 			login = prop.getProperty("login");
-			System.out.println("login= " + login);
 			pwd = prop.getProperty("pwd");
-			System.out.println("pwd= " + pwd);
 			toAddressSupport = prop.getProperty("toAddressSupport");
-			System.out.println("toAddressSupport= " + toAddressSupport);
 		} catch (FileNotFoundException e) {
 			Window.alert("contact.properties file not found.");
 			e.printStackTrace();

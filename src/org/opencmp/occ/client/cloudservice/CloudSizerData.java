@@ -1,10 +1,9 @@
 package org.opencmp.occ.client.cloudservice;
 
 import java.io.Serializable;
-import java.lang.String;
 
 /**
- * Einfaches Objekt als CloudSizer mit CPU, RAM, HDD, Location und Preis
+ * Einfaches Objekt als CloudSizer mit CPU, RAM, HDD, Location Cloud Apps und Preis
  * 
  * @author Bagautdinov
  * 
@@ -17,6 +16,7 @@ public class CloudSizerData implements Serializable {
 	private String hddSize;
 	private String priceSize;
 	private String cloudLocation;
+	private String cloudApps;
 
 	public CloudSizerData() {
 	}
@@ -40,6 +40,13 @@ public class CloudSizerData implements Serializable {
 	public void setCloudLocation(String cloudLocation) {
 		this.cloudLocation = cloudLocation;
 	}
+	
+	/**
+	 * @param cloudApps the cloudApps to set
+	 */
+	public void setCloudApps(String cloudApps) {
+		this.cloudApps = cloudApps;
+	}
 
 	public String getCpuSize() {
 		return cpuSize;
@@ -60,6 +67,13 @@ public class CloudSizerData implements Serializable {
 	public String getCloudLocation() {
 		return cloudLocation;
 	}
+	
+	/**
+	 * @return the cloudApps
+	 */
+	public String getCloudApps() {
+		return cloudApps;
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -68,7 +82,7 @@ public class CloudSizerData implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "CloudSizerData [cpuSize=" + cpuSize + ", ramSize=" + ramSize + ", hddSize=" + hddSize + ", priceSize=" + priceSize + ", cloudLocation=" + cloudLocation + "]";
+		return "CloudSizerData [cpuSize=" + cpuSize + ", ramSize=" + ramSize + ", hddSize=" + hddSize + ", priceSize=" + priceSize + ", cloudLocation=" + cloudLocation +", cloudApps=" + cloudApps + "]";
 	}
 	
 	/**
@@ -80,21 +94,24 @@ public class CloudSizerData implements Serializable {
 				+"Memory(in MB):   " + ramSize + ",\n"
 				+"Storage(in GB): " + hddSize + ",\n"
 				+"Monthly Price(in \u20ac):   " + priceSize + ",\n"
-				+"Server-Region:   " + cloudLocation + "."; 
+				+"Server-Region:   " + cloudLocation + ",\n" 
+				+"Cloud-Apps:   " + cloudApps + "."; 
 	}
 	
 	/**
 	 * Formatierte Ausgabe fuer neuen registrierten Benutzer englische Version.
 	 */
 	public String toStringNewUserEn() {
-		return "Number of vCPUs: " + cpuSize + ",\nMemory(in MB): " + ramSize + ",\nStorage (in GB): " + hddSize + ",\nMonthly Price(in Ä): " + priceSize + ",\nServer-Region: " + cloudLocation + ".";
+		return "Number of vCPUs: " + cpuSize + ",\nMemory(in MB): " + ramSize + ",\nStorage (in GB): " + hddSize + ",\nMonthly Price(in Ä): " + priceSize + ",\nServer-Region: " + cloudLocation + ",\nCloud-Apps: " + cloudApps + ".";
 	}
 
 	/**
 	 * Formatierte Ausgabe fuer neuen registrierten Benutzer.
 	 */
 	public String toStringNewUser() {
-		return "CloudSizer Data\nAnz. CPU: " + cpuSize + ",\nSpeichergroﬂe(in MB): " + ramSize + ",\nHDD Kap.(in GB): " + hddSize + ",\nPreis in Monat(in Ä): " + priceSize + ",\nServerposition: " + cloudLocation + ".";
+		return "CloudSizer Data\nAnz. CPU: " + cpuSize + ",\nSpeichergroﬂe(in MB): " + ramSize + ",\nHDD Kap.(in GB): " + hddSize + ",\nPreis in Monat(in Ä): " + priceSize + ",\nServerposition: " + cloudLocation +",\nCloud-Apps: " + cloudApps + ".";
 	}
+
+	
 
 }
