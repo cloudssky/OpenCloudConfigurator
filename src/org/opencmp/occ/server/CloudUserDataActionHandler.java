@@ -1,5 +1,10 @@
 package org.opencmp.occ.server;
 
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.opencmp.occ.client.cloudservice.registration.action.CloudUserData;
 import org.opencmp.occ.client.cloudservice.registration.action.CloudUserDataResult;
 
@@ -24,16 +29,16 @@ public class CloudUserDataActionHandler implements ActionHandler<CloudUserData, 
 	
 	DB_Conn db;
 	SendMailSSLImpl send;
-	String id = "test";//TODO: Id-Generator implementieren z.B. aktuelle Zeit und Benurtzername(0205121350bob)
+	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	Date date = new Date();//TODO: Id-Generator implementieren z.B. aktuelle Zeit und Benurtzername(0205121350bob) !!! aktuell Zeitstempel!!!
 	CloudUserData cloudUserData;
 	@Override
 	public CloudUserDataResult execute(CloudUserData action, ExecutionContext context) throws ActionException {
-//		db = new DB_Conn();//TODO: gibt ein Problem, nachdem ich eine Spalte(firmaname) hizugefuegt habe: "Column count doesn't match value count at row 1"
-//		db.connectToDB(id, action.getCloudSizerData().getCpuSize(), action.getName(), action.getLastName(), 
-//						action.getFirmaName(),action.getEmail(), action.getPassword(), action.getStreet(), 
-//						action.getHouse(), action.getPost(), action.getCity(), "Insert");
-//		System.out.println("action.getCloudValue()  " +action.getCloudValue());
-//		System.out.println("action.getName()  " + action.getName());
+		db = new DB_Conn();
+		db.connectToDB(dateFormat.format(date), action.getCloudSizerData().getCpuSize(), action.getCloudSizerData().getRamSize(), action.getCloudSizerData().getHddSize(),
+						action.getCloudSizerData().getPriceSize(), action.getCloudSizerData().getCloudLocation(), action.getCloudSizerData().getCloudApps(),
+						action.getName(), action.getLastName(), action.getFirmaName(), action.getEmail(), action.getPassword(), action.getStreet(), 
+						action.getHouse(), action.getPost(), action.getCity(), "Insert");
 		send = new SendMailSSLImpl();
 //		send.sendeEMailSSL();
 		send.sendeEMailSSLonSupport(action);
