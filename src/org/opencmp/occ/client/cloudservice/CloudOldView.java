@@ -89,6 +89,7 @@ public class CloudOldView extends ViewImpl implements CloudOldPresenter.MyView {
 		cloudAppsListBox.addItem("- not selected -");
 		cloudAppsListBox.addItem("Alfresco");
 		cloudAppsListBox.addItem("OpenCms");
+		cloudAppsListBox.addItem("Zentyal");
 		cloudAppsListBox.addItem("Zimbra");
 		//appListbox.setSelectedIndex(0);
 	    // anzahl der sichbaren Elementen

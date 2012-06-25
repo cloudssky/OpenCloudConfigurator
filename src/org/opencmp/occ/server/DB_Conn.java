@@ -1,8 +1,14 @@
 package org.opencmp.occ.server;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
+import java.util.Properties;
+
+import com.google.gwt.user.client.Window;
 
 /**
  * Diese Klasse ermoeglicht Anbindung an mySQL-DB und Speicherung(Insert-Method)
@@ -14,8 +20,11 @@ import java.sql.Statement;
  */
 public class DB_Conn {
 
-	String dbUrl = "jdbc:mysql://localhost:3306/opencloudconfigurator";
-	String dbClass = "com.mysql.jdbc.Driver";
+	String dbUrl; 
+	String dbClass;
+	String tableName;
+	String dbLogin;
+	String dbPWD;
 
 	public String connectToDB(String id, String cpuSize, String ramSize,
 			String hddSize, String priceSize, String cloudLocation,
@@ -24,13 +33,13 @@ public class DB_Conn {
 			String post, String city, String methodName)
 			throws IllegalArgumentException {
 		Connection con = null;
-
+		readDBData();//alle Daten fuer DB-Verbindung auslesen
 		if (methodName.equals("Insert")) {
 			try {
 				Class.forName(dbClass).newInstance();
-				con = DriverManager.getConnection(dbUrl, "root", "root");
+				con = DriverManager.getConnection(dbUrl, dbLogin, dbPWD);
 				Statement stmt = con.createStatement();
-				String query = "insert into clouduserdata (id, cpusize, ramsize, hddsize, pricesize, cloudlocation, cloudapps, name, lastname, firmaname, email, password, street, house, post, city) values ("
+				String query = "insert into " + tableName + " (id, cpusize, ramsize, hddsize, pricesize, cloudlocation, cloudapps, name, lastname, firmaname, email, password, street, house, post, city) values ("
 						+ "'" + id + "'"
 						+ ",'" + cpuSize + "'"
 						+ ",'" + ramSize + "'"
@@ -58,7 +67,7 @@ public class DB_Conn {
 		} else if (methodName.equals("Delete")) {
 			try {
 				Class.forName(dbClass).newInstance();
-				con = DriverManager.getConnection(dbUrl, "root", "root");
+				con = DriverManager.getConnection(dbUrl, dbLogin, dbPWD);
 				Statement stmt = con.createStatement();
 				String query = "delete from test_table where id =" + id;
 				/* int i = */stmt.executeUpdate(query);
@@ -71,7 +80,7 @@ public class DB_Conn {
 		} else if (methodName.equals("Update")) {
 			try {
 				Class.forName(dbClass).newInstance();
-				con = DriverManager.getConnection(dbUrl, "root", "root");
+				con = DriverManager.getConnection(dbUrl, dbLogin, dbPWD);
 				Statement stmt = con.createStatement();
 				String query = "update test_table set name = ‘" + name
 						+ "‘ where id =" + id;
@@ -84,6 +93,27 @@ public class DB_Conn {
 			}
 		}
 		return "failure";
+	}
+	
+	/**
+	 * Diese Methode liest alle notwendige Daten fuer DB-Verbindung(dbUrl; dbClass; tableName; dbLogin; dbPWD) aus db-connect.property-Datei. 
+	 */
+	private void readDBData(){
+		Properties prop = new Properties();
+		try {
+			prop.load(new FileInputStream("WEB-INF/properties/db-connect.properties"));
+			dbUrl = prop.getProperty("dbUrl");
+			dbClass  = prop.getProperty("dbClass");
+			tableName = prop.getProperty("tableName");
+			dbLogin = prop.getProperty("dbLogin");
+			dbPWD = prop.getProperty("dbPWD");
+		} catch (FileNotFoundException e) {
+			Window.alert("db-connect.properties file not found.");
+			e.printStackTrace();
+		} catch (IOException e) {
+			Window.alert("Problem with readDBData method");
+			e.printStackTrace();
+		} 
 	}
 
 }

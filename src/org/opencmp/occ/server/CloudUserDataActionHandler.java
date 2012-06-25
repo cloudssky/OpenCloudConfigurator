@@ -1,7 +1,6 @@
 package org.opencmp.occ.server;
 
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 

@@ -138,7 +138,7 @@ public class SendMailSSLImpl extends RemoteServiceServlet implements MailService
 	private void readContactFile(){
 		Properties prop = new Properties();
 		try {
-			prop.load(new FileInputStream("properties/contact.properties"));
+			prop.load(new FileInputStream("WEB-INF/properties/contact.properties"));
 			fromAddress = prop.getProperty("fromAddress");
 			login = prop.getProperty("login");
 			pwd = prop.getProperty("pwd");
