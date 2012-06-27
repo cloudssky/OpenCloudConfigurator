@@ -18,14 +18,15 @@ import com.google.gwt.user.client.Window;
  * @author Bagautdinov
  * @version 1.0
  */
-public class DB_Conn {
+public class DB_Conn{
 
+	Properties pr;
 	String dbUrl; 
 	String dbClass;
 	String tableName;
 	String dbLogin;
 	String dbPWD;
-
+	
 	public String connectToDB(String id, String cpuSize, String ramSize,
 			String hddSize, String priceSize, String cloudLocation,
 			String cloudApps, String name, String lastName, String firmaName,
@@ -89,7 +90,7 @@ public class DB_Conn {
 				return "success";
 			} // end try
 			catch (Exception e) {
-				e.printStackTrace();
+				e.printStackTrace(); 
 			}
 		}
 		return "failure";
@@ -99,16 +100,17 @@ public class DB_Conn {
 	 * Diese Methode liest alle notwendige Daten fuer DB-Verbindung(dbUrl; dbClass; tableName; dbLogin; dbPWD) aus db-connect.property-Datei. 
 	 */
 	private void readDBData(){
-		Properties prop = new Properties();
 		try {
-			prop.load(new FileInputStream("WEB-INF/properties/db-connect.properties"));
-			dbUrl = prop.getProperty("dbUrl");
-			dbClass  = prop.getProperty("dbClass");
-			tableName = prop.getProperty("tableName");
-			dbLogin = prop.getProperty("dbLogin");
-			dbPWD = prop.getProperty("dbPWD");
+			pr = new Properties();
+//			pr.load(new FileInputStream("D:/db-connect.properties"));//for local version
+			pr.load(new FileInputStream("/var/lib/tomcat6/webapps/OpenCloudConfigurator/WEB-INF/properties/db-connect.properties"));
+			dbUrl = pr.getProperty("dbUrl");
+			dbClass  = pr.getProperty("dbClass");
+			tableName = pr.getProperty("tableName");
+			dbLogin = pr.getProperty("dbLogin");
+			dbPWD = pr.getProperty("dbPWD");
 		} catch (FileNotFoundException e) {
-			Window.alert("db-connect.properties file not found.");
+			Window.alert("db-connect .properties file not found.");
 			e.printStackTrace();
 		} catch (IOException e) {
 			Window.alert("Problem with readDBData method");

@@ -1,11 +1,9 @@
 package org.opencmp.occ.client.place;
 
-import org.opencmp.occ.client.place.DefaultPlace;
-
+import com.google.gwt.event.shared.EventBus;
+import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.proxy.PlaceManagerImpl;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
-import com.google.inject.Inject;
-import com.google.gwt.event.shared.EventBus;
 import com.gwtplatform.mvp.client.proxy.TokenFormatter;
 
 public class ClientPlaceManager extends PlaceManagerImpl {

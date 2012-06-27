@@ -2,13 +2,13 @@ package org.opencmp.occ.client.cloudservice.registration.popup;
 
 import org.opencmp.occ.client.place.NameTokens;
 
+import com.google.gwt.event.shared.EventBus;
+import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
-import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.NameToken;
+import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
-import com.google.inject.Inject;
-import com.google.gwt.event.shared.EventBus;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 
 public class PopupPresenter extends Presenter<PopupPresenter.MyView, PopupPresenter.MyProxy> {

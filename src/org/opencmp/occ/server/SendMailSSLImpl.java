@@ -31,6 +31,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 @SuppressWarnings("serial")
 public class SendMailSSLImpl extends RemoteServiceServlet implements MailService {
 
+	Properties pr;
 	String fromAddress;
 	String login;
 	String pwd;
@@ -43,7 +44,6 @@ public class SendMailSSLImpl extends RemoteServiceServlet implements MailService
 
 	private MailObject mailObjectSupport;
 	private MailObject mailObjectNewUser;
-	
 	
 	/**
 	 * Diese Methode versendet eine E-Mail an Support mit angegebenem
@@ -136,13 +136,14 @@ public class SendMailSSLImpl extends RemoteServiceServlet implements MailService
 	 * Diese Methode liest notwendige Daten(fromAddress; login; pwd; toAddressSupport) aus contact.property-Datei. 
 	 */
 	private void readContactFile(){
-		Properties prop = new Properties();
 		try {
-			prop.load(new FileInputStream("WEB-INF/properties/contact.properties"));
-			fromAddress = prop.getProperty("fromAddress");
-			login = prop.getProperty("login");
-			pwd = prop.getProperty("pwd");
-			toAddressSupport = prop.getProperty("toAddressSupport");
+			pr = new Properties();
+//			pr.load(new FileInputStream("D:/contact.properties"));//for local version
+			pr.load(new FileInputStream("/var/lib/tomcat6/webapps/OpenCloudConfigurator/WEB-INF/properties/contact.properties"));
+			fromAddress = pr.getProperty("fromAddress");
+			login = pr.getProperty("login");
+			pwd = pr.getProperty("pwd");
+			toAddressSupport = pr.getProperty("toAddressSupport");
 		} catch (FileNotFoundException e) {
 			Window.alert("contact.properties file not found.");
 			e.printStackTrace();
