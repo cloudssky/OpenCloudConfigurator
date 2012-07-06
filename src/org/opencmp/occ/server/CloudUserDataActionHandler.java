@@ -25,11 +25,10 @@ public class CloudUserDataActionHandler implements ActionHandler<CloudUserData, 
 	public CloudUserDataActionHandler() {
 	}
 	
-	
 	DB_Conn db;
 	SendMailSSLImpl send;
 	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	Date date = new Date();//TODO: Id-Generator implementieren z.B. aktuelle Zeit und Benurtzername(0205121350bob) !!! aktuell Zeitstempel!!!
+	Date date = new Date();//TODO: Id-Generator implementieren z.B. aktuelle Zeit und Benurtzername(0205121350bob) !!! aktuell nur  Zeitstempel!!!
 	CloudUserData cloudUserData;
 	@Override
 	public CloudUserDataResult execute(CloudUserData action, ExecutionContext context) throws ActionException {

@@ -3,10 +3,16 @@ package org.opencmp.occ.client.cloudservice;
 import org.opencmp.occ.client.cloudservice.slider.SliderBar;
 import org.opencmp.occ.client.cloudservice.slider.SliderBar.LabelFormatter;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.http.client.Request;
+import com.google.gwt.http.client.RequestBuilder;
+import com.google.gwt.http.client.RequestCallback;
+import com.google.gwt.http.client.RequestException;
+import com.google.gwt.http.client.Response;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ChangeListener;
 import com.google.gwt.user.client.ui.Grid;
@@ -44,7 +50,8 @@ public class CloudOldView extends ViewImpl implements CloudOldPresenter.MyView {
 	final RadioButton locate3;
 	final RadioButton locate4;
 	String countryLocation = "Germany";
-	final ListBox cloudAppsListBox;	
+	ListBox cloudAppsListBox;	
+	private String[] temp;
 	
 	
 	
@@ -85,12 +92,9 @@ public class CloudOldView extends ViewImpl implements CloudOldPresenter.MyView {
 		locate2 = new RadioButton("country", "US North");
 		locate3 = new RadioButton("country", "Middle East");
 		locate4 = new RadioButton("country", "Asia Pacific");
-		cloudAppsListBox = new ListBox(false);
-		cloudAppsListBox.addItem("- not selected -");
-		cloudAppsListBox.addItem("Alfresco");
-		cloudAppsListBox.addItem("OpenCms");
-		cloudAppsListBox.addItem("Zentyal");
-		cloudAppsListBox.addItem("Zimbra");
+		
+		loadCloudAppsList();
+		
 		//appListbox.setSelectedIndex(0);
 	    // anzahl der sichbaren Elementen
 //		appListbox.setVisibleItemCount(5);
@@ -241,6 +245,32 @@ public class CloudOldView extends ViewImpl implements CloudOldPresenter.MyView {
 		vpanel.setCellHorizontalAlignment(registrationButton,
 				HasHorizontalAlignment.ALIGN_CENTER);
 		panel.add(vpanel);
+	}
+
+	/**
+	 * Diese Methode liest zeilenweise Cloud Apps-Namen aus cloud-apps.properties Datei(war-Ordner) und speichert die in einer Liste.
+	 */
+	private void loadCloudAppsList() {
+		cloudAppsListBox = new ListBox(false);
+		
+		RequestBuilder requestBuilder = new RequestBuilder( RequestBuilder.GET, "cloud-apps.properties");
+        try {
+            requestBuilder.sendRequest(null, new RequestCallback(){
+                public void onError(Request request, Throwable exception) {
+                    GWT.log( "failed file reading", exception );
+                }
+				
+				@Override
+				public void onResponseReceived(Request request,	Response response) {
+					temp = response.getText().split("\n");
+					for(String str :temp){
+						cloudAppsListBox.addItem(str);
+					}
+				}} );
+        } catch (RequestException e) {
+            GWT.log( "failed file reading", e );
+        }
+		
 	}
 
 	@Override

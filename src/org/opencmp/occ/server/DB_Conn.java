@@ -102,8 +102,8 @@ public class DB_Conn{
 	private void readDBData(){
 		try {
 			pr = new Properties();
-//			pr.load(new FileInputStream("D:/db-connect.properties"));//for local version
-			pr.load(new FileInputStream("/var/lib/tomcat6/webapps/OpenCloudConfigurator/WEB-INF/properties/db-connect.properties"));
+			pr.load(new FileInputStream("D:/db-connect.properties"));//for local version
+//			pr.load(new FileInputStream("/var/lib/tomcat6/webapps/OpenCloudConfigurator/WEB-INF/properties/db-connect.properties"));
 			dbUrl = pr.getProperty("dbUrl");
 			dbClass  = pr.getProperty("dbClass");
 			tableName = pr.getProperty("tableName");

@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
 jarsExcludedFromWebInfLib=
+launchConfigExternalUrlPrefix=http\://localhost\:8080/OpenCloudConfigurator
 warSrcDir=war
 warSrcDirIsOutput=true

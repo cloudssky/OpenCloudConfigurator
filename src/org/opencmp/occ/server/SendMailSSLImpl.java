@@ -138,8 +138,8 @@ public class SendMailSSLImpl extends RemoteServiceServlet implements MailService
 	private void readContactFile(){
 		try {
 			pr = new Properties();
-//			pr.load(new FileInputStream("D:/contact.properties"));//for local version
-			pr.load(new FileInputStream("/var/lib/tomcat6/webapps/OpenCloudConfigurator/WEB-INF/properties/contact.properties"));
+			pr.load(new FileInputStream("D:/contact.properties"));//for local version
+//			pr.load(new FileInputStream("/var/lib/tomcat6/webapps/OpenCloudConfigurator/WEB-INF/properties/contact.properties"));
 			fromAddress = pr.getProperty("fromAddress");
 			login = pr.getProperty("login");
 			pwd = pr.getProperty("pwd");
