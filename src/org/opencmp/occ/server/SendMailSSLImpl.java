@@ -18,6 +18,7 @@ import org.opencmp.occ.client.cloudservice.mailsend.MailService;
 import org.opencmp.occ.client.cloudservice.registration.action.CloudUserData;
 import org.opencmp.occ.shared.MailObject;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
@@ -63,7 +64,7 @@ public class SendMailSSLImpl extends RemoteServiceServlet implements MailService
 				return new PasswordAuthentication(mailObjectSupport.getFromAddress(), mailObjectSupport.getPwd());
 			}
 		});
-
+		/* Ab hier wird eine E-Mail an support versendet.*/
 		try {
 			// Eine neue Message fuer Support erzeugen
 			Message message = new MimeMessage(session);
@@ -85,11 +86,12 @@ public class SendMailSSLImpl extends RemoteServiceServlet implements MailService
 			Transport.send(message);
 
 			// System.out.println("Done");
-
+			Log.info("sending email per ssl to support was successful");
 		} catch (MessagingException e) {
+			Log.error("you have a problem with email sending to support", e);
 			throw new RuntimeException(e);
 		}
-		/* Ab hier wird eine E-Mail an neuem registrierten Benutzer  versendet.*/
+		/* Ab hier wird eine E-Mail an neuem registrierten Benutzer versendet.*/
 		setEmailDataNewUser();
 		try {
 			// Eine neue Message fuer NewUser erzeugen
@@ -114,8 +116,9 @@ public class SendMailSSLImpl extends RemoteServiceServlet implements MailService
 			Transport.send(message);
 
 			// System.out.println("Done");
-
+			Log.info("sending email per ssl to new user was successful");
 		} catch (MessagingException e) {
+			Log.error("you have a problem with email sending to new user", e);
 			throw new RuntimeException(e);
 		}
 		return "true";
@@ -144,12 +147,15 @@ public class SendMailSSLImpl extends RemoteServiceServlet implements MailService
 			login = pr.getProperty("login");
 			pwd = pr.getProperty("pwd");
 			toAddressSupport = pr.getProperty("toAddressSupport");
+			Log.info("reading  a data from contact.properties was successful");
 		} catch (FileNotFoundException e) {
 			Window.alert("contact.properties file not found.");
 			e.printStackTrace();
+			Log.error("contact.properties file not found.", e);
 		} catch (IOException e) {
 			Window.alert("Problem with readContactFile method");
 			e.printStackTrace();
+			Log.error("Problem with readContactFile method", e);
 		} 
 	}
 

@@ -1,5 +1,7 @@
  create database cloudservice;
  
+ use cloudservice;
+ 
  create table registration(
 	id varchar(20) not null,
 	cloudvalue int not null,

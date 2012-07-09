@@ -129,14 +129,6 @@ public class CloudUserData extends ActionImpl<CloudUserDataResult> {
 		return city;
 	}
 
-	// /**
-	// * @param cloudValue
-	// * the cloudValue to set
-	// */
-	// public void setCloudValue(String cloudValue) {
-	// this.cloudValue = cloudValue;
-	// }
-
 	/**
 	 * @param cloudSizerData
 	 *            the cloudSizerData to set

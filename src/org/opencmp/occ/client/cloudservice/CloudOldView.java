@@ -3,7 +3,7 @@ package org.opencmp.occ.client.cloudservice;
 import org.opencmp.occ.client.cloudservice.slider.SliderBar;
 import org.opencmp.occ.client.cloudservice.slider.SliderBar.LabelFormatter;
 
-import com.google.gwt.core.client.GWT;
+import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -13,6 +13,7 @@ import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestCallback;
 import com.google.gwt.http.client.RequestException;
 import com.google.gwt.http.client.Response;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ChangeListener;
 import com.google.gwt.user.client.ui.Grid;
@@ -257,7 +258,9 @@ public class CloudOldView extends ViewImpl implements CloudOldPresenter.MyView {
         try {
             requestBuilder.sendRequest(null, new RequestCallback(){
                 public void onError(Request request, Throwable exception) {
-                    GWT.log( "failed file reading", exception );
+                    Window.alert("failed file reading" + exception);
+//                	GWT.log( "failed file reading", exception);
+                    Log.error("failed file reading", exception);
                 }
 				
 				@Override
@@ -267,8 +270,10 @@ public class CloudOldView extends ViewImpl implements CloudOldPresenter.MyView {
 						cloudAppsListBox.addItem(str);
 					}
 				}} );
-        } catch (RequestException e) {
-            GWT.log( "failed file reading", e );
+        } catch (RequestException exception) {
+        	Window.alert("failed file reading" + exception);
+//            GWT.log( "failed file reading", exception );
+            Log.error("failed file reading", exception);
         }
 		
 	}

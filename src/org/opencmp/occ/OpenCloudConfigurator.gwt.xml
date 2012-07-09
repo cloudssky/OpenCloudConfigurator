@@ -12,31 +12,38 @@
 	<!-- <inherits name='com.google.gwt.user.theme.chrome.Chrome'/> -->
 	<!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/> -->
 	
-	<!-- SliderBar -->
-	<!-- inherits name="com.kiouri.sliderbar.SliderBarMVP" /-->
+	<!-- ****************** for Log ***************************-->
+	<!-- inherits name='com.allen_sauer.gwt.log.gwt-log-DEBUG' /-->
+
+	<!-- For development, a default of `DEBUG` is recommended -->
+	<inherits name='com.allen_sauer.gwt.log.gwt-log-OFF' />
+	<extend-property name="log_level" values="INFO"/>
+
+	<!-- ****************** SliderBar *************************-->
+	<!-- inherits name='com.kiouri.sliderbar.SliderBarMVP' / -->
 	<!-- Other module inherits -->
 	<inherits name='com.gwtplatform.mvp.Mvp' />
 	<inherits name='com.gwtplatform.dispatch.Dispatch' />
 	<!-- Validierung -->
-	<!--  inherits name='org.hibernate.validator.HibernateValidator' /-->
+	<!-- inherits name='org.hibernate.validator.HibernateValidator' / -->
 	<replace-with
 		class='com.google.gwt.sample.validation.client.SampleValidatorFactory'>
 		<when-type-is class='javax.validation.ValidatorFactory' />
 	</replace-with>
-	<inherits name='javax.validation.Validation' /> 
+	<inherits name='javax.validation.Validation' />
 	<inherits name='com.google.gwt.validation.Validation' />
-	<!--  inherits name='com.em.validation.Validation' /-->
-	<!-- inherits name='com.gwtent.GwtEnt' /-->
+	<!-- inherits name='com.em.validation.Validation' / -->
+	<!-- inherits name='com.gwtent.GwtEnt' / -->
 	<!-- gwt-eye-candy -->
-	<!-- inherits name='com.google.code.GwtEyeCandy' /-->
+	<!-- inherits name='com.google.code.GwtEyeCandy' / -->
 	<!-- Specify the app entry point class. -->
 	<entry-point class='org.opencmp.occ.client.OpenCloudConfigurator' />
 
 	<!-- Specify the paths for translatable code -->
 	<source path='client' />
 	<source path='shared' />
-	
-	<!-- sessions-enabled>true</sessions-enabled-->
+
+	<!-- sessions-enabled>true</sessions-enabled -->
 	<define-configuration-property name='gin.ginjector'
 		is-multi-valued='false' />
 	<set-configuration-property name='gin.ginjector'

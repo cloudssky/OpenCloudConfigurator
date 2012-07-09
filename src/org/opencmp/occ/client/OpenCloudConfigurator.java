@@ -1,6 +1,7 @@
 package org.opencmp.occ.client;
 
 import org.opencmp.occ.client.gin.ClientGinjector;
+import com.allen_sauer.gwt.log.client.Log;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -16,15 +17,33 @@ import com.gwtplatform.mvp.client.DelayedBindRegistry;
  *
  */
 public class OpenCloudConfigurator implements EntryPoint, ValueChangeHandler<String> {
-
+	
+	/**
+	   * This field gets compiled out when <code>log_level=OFF</code>, or any <code>log_level</code>
+	   * higher than <code>DEBUG</code>.
+	   */
+	@SuppressWarnings("unused")
+	private long startTimeMillis;
+	  
 	private final ClientGinjector ginjector = GWT.create(ClientGinjector.class);
-//	  private final SessionId sessionId = new SessionId();
-	//test
-	//test
 	
 	@Override
 	public void onModuleLoad() {
 		
+		/*
+	     * Install an UncaughtExceptionHandler which will produce <code>FATAL</code> log messages
+	     */
+	    Log.setUncaughtExceptionHandler();
+		
+	    /*
+	     * Use a <code>if (Log.isDebugEnabled()) {...}</code> guard to ensure that
+	     * <code>System.currentTimeMillis()</code> is compiled out when <code>log_level=OFF</code>, or
+	     * any <code>log_level</code> higher than <code>DEBUG</code>.
+	     */
+	    if (Log.isDebugEnabled()) {
+	      startTimeMillis = System.currentTimeMillis();
+	    }
+	    
 		initHistoryObservations();
 		// This is required for Gwt-Platform proxy's generator
 		DelayedBindRegistry.bind(ginjector);

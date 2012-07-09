@@ -6,6 +6,7 @@ import org.opencmp.occ.client.cloudservice.registration.action.CloudUserDataResu
 import org.opencmp.occ.client.cloudservice.registration.popup.Popup2Presenter;
 import org.opencmp.occ.client.place.NameTokens;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.EventBus;
@@ -168,6 +169,7 @@ public class RegistrationPresenter extends
 					}
 				} else {
 					Window.alert(validationInput);
+					Log.error("you have a problem", validationInput);
 				}
 			}
 
@@ -180,6 +182,7 @@ public class RegistrationPresenter extends
 		@Override
 		public void onSuccess(CloudUserDataResult result) {
 				addToPopupSlot(mypopup2);
+				Log.info("new user was created");
 		}
 
 		// Wenn Probleme gibt, ausgeben
@@ -187,6 +190,7 @@ public class RegistrationPresenter extends
 		public void onFailure(Throwable caught) {
 			Window.alert("CloudUser can not be created: "
 					+ caught.getMessage());
+			Log.error("a new user was not created", caught.getMessage());
 		}
 	};
 

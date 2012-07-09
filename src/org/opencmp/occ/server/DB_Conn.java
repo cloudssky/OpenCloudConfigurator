@@ -8,6 +8,7 @@ import java.sql.DriverManager;
 import java.sql.Statement;
 import java.util.Properties;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.user.client.Window;
 
 /**
@@ -60,10 +61,12 @@ public class DB_Conn{
 				// System.out.println("my query  "+ query);
 				/*int i =*/ stmt.executeUpdate(query);
 				con.close();
+				Log.info("new user was save in DB");
 				return "success";
 			} // end try
 			catch (Exception e) {
 				e.printStackTrace();
+				Log.error("new user can not to be saved in DB", e);
 			}
 		} else if (methodName.equals("Delete")) {
 			try {
@@ -109,12 +112,15 @@ public class DB_Conn{
 			tableName = pr.getProperty("tableName");
 			dbLogin = pr.getProperty("dbLogin");
 			dbPWD = pr.getProperty("dbPWD");
+			Log.info("reading  a data from db-connect.properties was successful");
 		} catch (FileNotFoundException e) {
 			Window.alert("db-connect .properties file not found.");
 			e.printStackTrace();
+			Log.error("db-connect .properties file not found.", e);
 		} catch (IOException e) {
 			Window.alert("Problem with readDBData method");
 			e.printStackTrace();
+			Log.error("Problem with readDBData method", e);
 		} 
 	}
 
