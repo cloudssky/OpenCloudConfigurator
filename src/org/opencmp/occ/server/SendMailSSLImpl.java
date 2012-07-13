@@ -19,6 +19,7 @@ import org.opencmp.occ.client.cloudservice.registration.action.CloudUserData;
 import org.opencmp.occ.shared.MailObject;
 
 import com.allen_sauer.gwt.log.client.Log;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
@@ -26,6 +27,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 /**
  * Eine serverseitige Klasse, die E-Mail ueber SSL an angegebenen Adressen(Support, NewUser) versendet.
  * A server-side class, the e-mail addresses listed at over SSL (Support, NewUser) * sent.
+ * Log-Komponente wird von http://code.google.com/p/gwt-log/ benutzt.
  * @author bagautdinov
  * @version 1.0
  */
@@ -87,8 +89,10 @@ public class SendMailSSLImpl extends RemoteServiceServlet implements MailService
 
 			// System.out.println("Done");
 			Log.info("sending email per ssl to support was successful");
+			GWT.log( "sending email per ssl to support was successful");
 		} catch (MessagingException e) {
 			Log.error("you have a problem with email sending to support", e);
+			GWT.log("you have a problem with email sending to support", e);
 			throw new RuntimeException(e);
 		}
 		/* Ab hier wird eine E-Mail an neuem registrierten Benutzer versendet.*/
@@ -117,8 +121,10 @@ public class SendMailSSLImpl extends RemoteServiceServlet implements MailService
 
 			// System.out.println("Done");
 			Log.info("sending email per ssl to new user was successful");
+			GWT.log("sending email per ssl to new user was successful");
 		} catch (MessagingException e) {
 			Log.error("you have a problem with email sending to new user", e);
+			GWT.log("you have a problem with email sending to new user", e);
 			throw new RuntimeException(e);
 		}
 		return "true";
@@ -141,21 +147,25 @@ public class SendMailSSLImpl extends RemoteServiceServlet implements MailService
 	private void readContactFile(){
 		try {
 			pr = new Properties();
-			pr.load(new FileInputStream("D:/contact.properties"));//for local version
-//			pr.load(new FileInputStream("/var/lib/tomcat6/webapps/OpenCloudConfigurator/WEB-INF/properties/contact.properties"));
+//			pr.load(new FileInputStream("D:/contact.properties"));//for local version
+			pr.load(new FileInputStream("/var/lib/tomcat6/webapps/OpenCloudConfigurator/WEB-INF/properties/contact.properties"));
 			fromAddress = pr.getProperty("fromAddress");
 			login = pr.getProperty("login");
 			pwd = pr.getProperty("pwd");
 			toAddressSupport = pr.getProperty("toAddressSupport");
 			Log.info("reading  a data from contact.properties was successful");
+			GWT.log("reading  a data from contact.properties was successful");
 		} catch (FileNotFoundException e) {
 			Window.alert("contact.properties file not found.");
 			e.printStackTrace();
 			Log.error("contact.properties file not found.", e);
+			GWT.log("contact.properties file not found.", e);
 		} catch (IOException e) {
 			Window.alert("Problem with readContactFile method");
+			GWT.log("Problem with readContactFile method");
 			e.printStackTrace();
 			Log.error("Problem with readContactFile method", e);
+			GWT.log("Problem with readContactFile method", e);
 		} 
 	}
 

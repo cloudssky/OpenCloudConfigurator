@@ -2,27 +2,37 @@
 
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
 	xmlns:g='urn:import:com.google.gwt.user.client.ui' 
-	
+	xmlns:s='com.kiouri.sliderbar.SliderBarMVP'
 	ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
 	ui:generateKeys='com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator'
-	ui:generateLocales='default' xmlns:s="urn:import:org.opencmp.occ.client.cloudservice.slider">
+	ui:generateLocales='default' xmlns:d="urn:import:com.google.gwt.dom.client"><!-- xmlns:s='urn:import:org.opencmp.occ.client.cloudservice.slider'-->
 
-	<g:HTMLPanel>
-	<h2>Cloudseite</h2>
-		<hr/>
-		<g:Label text="waehle dein CloudService" ui:field="textLabel"/>
-		<hr/>
-		<!--  s:SliderBar ui:field="sliderBar"/--><!-- Hier knallt -->
+	<g:HTMLPanel styleName="h1">
+	<div style="text-align:center; font-size:200%"> OpenCloudConfigurator</div>
 		
-		<g:Label text="CPU-Anzahl" ui:field="cloudLabel"/>
-		<g:TextBox text="1" ui:field="cloudValue" readOnly="true"/>
-		<g:Label text="Speicherkapazität(in MB)" ui:field="ramLabel"/>
-		<g:TextBox text="512" ui:field="ramValue" readOnly="true"/>
-		<g:Label text="HDD-Speicher(in GB)" ui:field="hddLabel"/>
-		<g:TextBox text="20GB" ui:field="hddValue" readOnly="true"/>
-		<g:Label text="Preis pro Monat(in Euro)" ui:field="priceLabel"/>
-		<g:TextBox text="14,99" ui:field="priceValue" readOnly="true"/>
+		<s:SliderBar ui:field="sliderBar"/>	<!-- Hier knallt -->
+		<div>
+		<div>
+			<g:Label text="Number of vCPUs" ui:field="cloudLabel"/>
+			<g:Label text="Memory(in MB)" ui:field="ramLabel"/>
+			<g:Label text="Storage(in GB)" ui:field="hddLabel"/>
+			<g:Label text="Monthly Price(in €)*" ui:field="priceLabel"/>
+			<g:Label text="Server-Region" ui:field="serverLabel"/>
+			<g:Label text="Cloud Apps" ui:field="cloudappsLabel"/>
+		</div>
+		<div class="clear"></div>
+		<div>	
+			<g:TextBox text="1" ui:field="cloudValue" readOnly="true" width="130"/>
+			<g:TextBox text="512" ui:field="ramValue" readOnly="true" width="130"/>
+			<g:TextBox text="20GB" ui:field="hddValue" readOnly="true" width="130"/>
+			<g:TextBox text="14,99" ui:field="priceValue" readOnly="true" width="130"/>
+			<g:ListBox visibleItemCount="1" name="Europe" ui:field="serverRegionListBox" styleName="gwt-TextBox" height="26"/>
+			<g:ListBox visibleItemCount="1" name="- not selected -" ui:field="cloudAppsListBox" styleName="gwt-TextBox" height="26"/>			
+		</div>
+		<div class="clear"></div>
 		<g:Label text="" ui:field="errorLabel"/>
-		<g:Button text= "Weiter(Registrieren)" ui:field="registrButton"/>
+			<g:Label text="* Free 30-day Trial" styleName="smallText"/>
+			<g:Button text= "Next" ui:field="Next"/>
+		</div>
 	</g:HTMLPanel>
 </ui:UiBinder>

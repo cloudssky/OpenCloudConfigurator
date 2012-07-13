@@ -6,6 +6,7 @@ import org.opencmp.occ.client.cloudservice.slider.SliderBar.LabelFormatter;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
@@ -22,12 +23,14 @@ public class CloudView extends ViewImpl implements CloudPresenter.MyView {
 	static final int RAM_VALUE = 512;
 	static final double PRICE_VALUE = 14.99;
 	
-//	@UiField SliderBar sliderBar;
-	@UiField Label textLabel;
+	@UiField SliderBar sliderBar;
+//	@UiField Label Text;
 	@UiField TextBox cloudValue;
 	@UiField TextBox ramValue;
 	@UiField TextBox hddValue;
 	@UiField TextBox priceValue;
+	@UiField ListBox serverRegionListBox;
+	@UiField ListBox cloudAppsListBox;
 	@UiField Label errorLabel;
 
 	public interface Binder extends UiBinder<Widget, CloudView> {
@@ -115,6 +118,34 @@ public class CloudView extends ViewImpl implements CloudPresenter.MyView {
 	 */
 	public TextBox getHddValue() {
 		return hddValue;
+	}
+	
+	/**
+	 * @return the serverRegionListBox
+	 */
+	public ListBox getServerRegionListBox() {
+		return serverRegionListBox;
+	}
+
+	/**
+	 * @param serverRegionListBox the serverRegionListBox to set
+	 */
+	public void setServerRegionListBox(ListBox serverRegionListBox) {
+		this.serverRegionListBox = serverRegionListBox;
+	}
+
+	/**
+	 * @return the cloudAppsListBox
+	 */
+	public ListBox getCloudAppsListBox() {
+		return cloudAppsListBox;
+	}
+
+	/**
+	 * @param cloudAppsListBox the cloudAppsListBox to set
+	 */
+	public void setCloudAppsListBox(ListBox cloudAppsListBox) {
+		this.cloudAppsListBox = cloudAppsListBox;
 	}
 
 }

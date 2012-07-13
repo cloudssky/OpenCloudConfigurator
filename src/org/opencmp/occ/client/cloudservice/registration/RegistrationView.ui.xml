@@ -7,7 +7,7 @@
 	ui:generateLocales='default' xmlns:d="urn:import:com.google.gwt.dom.client">
 
 	<g:HTMLPanel >
-		<h2>Registration page</h2>
+		<div class="titleName">Registration page</div>
 		<hr />
 			<div class="clear"></div>
 		<div class="regCloudSizerTitel " styleName="regCloudSizerTitel ">
@@ -49,9 +49,9 @@
 				<g:Label text="Confirm E-Mail*" ui:field="email2Label"  styleName="form1"  />
 				<g:TextBox title="z.B. my@mail.com" text="" ui:field="email2Value" visibleLength="15"/>
 				<g:Label text="Create a Password*" ui:field="passLabel"   styleName="form1" />
-				<g:PasswordTextBox title="must be min. 6 sings, min. 1 sing small or Big, min. 1 number and any from @#$%(ex. abc12D%)" text="" ui:field="passValue" visibleLength="15"/>
-				<g:Label text="Confirm your password*" ui:field="pass2Label"   styleName="form1" />
-				<g:PasswordTextBox title="must be min. 6 sings, min. 1 sing small or Big, min. 1 number and any from @#$%(ex. abc12D%)" text="" ui:field="pass2Value" visibleLength="15"/>
+				<g:PasswordTextBox title="must be min. 6 sings, min. 1 sing small or Big, min. 1 number and any from @#$%(ex. abc12D%)" text="" ui:field="passValue" visibleLength="15" styleName="gwt-TextBox"/>
+				<g:Label text="Confirm your password*" ui:field="pass2Label"   styleName="form1" width="140px" height="40px" />
+				<g:PasswordTextBox title="must be min. 6 sings, min. 1 sing small or Big, min. 1 number and any from @#$%(ex. abc12D%)" text="" ui:field="pass2Value" visibleLength="15" styleName="gwt-TextBox"/>
 			</div>
 			<g:Label text="" ui:field="errorLabel" />
 			<div class="adress" styleName="adress">
@@ -64,7 +64,7 @@
 				<g:TextBox title="z.B. 55555" text="" ui:field="postValue" visibleLength="15"/>
 				<g:Label text="City*" ui:field="cityLabel"  styleName="form2"/>
 				<g:TextBox title="z.B. Köln" text="" ui:field="cityValue" visibleLength="15"/>
-				<g:Label text="* mandatory fields" ui:field="infoLabel"  styleName="smallText"/>
+				<g:Label text=" *mandatory fields" ui:field="infoLabel"  styleName="smallText"/>
 			</div>
 			<div class="clear"></div>
 			<g:Button title="ok" text="Submit" ui:field="korrektButton" styleName="submitButton" />  

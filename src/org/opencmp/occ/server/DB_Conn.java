@@ -9,13 +9,14 @@ import java.sql.Statement;
 import java.util.Properties;
 
 import com.allen_sauer.gwt.log.client.Log;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
 
 /**
  * Diese Klasse ermoeglicht Anbindung an mySQL-DB und Speicherung(Insert-Method)
  * von Daten in DB. This class enables connection to mySQL DB and storage
  * (Insertion Method) data in DB.
- * 
+ * Log-Komponente wird von http://code.google.com/p/gwt-log/ benutzt.
  * @author Bagautdinov
  * @version 1.0
  */
@@ -62,11 +63,13 @@ public class DB_Conn{
 				/*int i =*/ stmt.executeUpdate(query);
 				con.close();
 				Log.info("new user was save in DB");
+				GWT.log("new user was save in DB");
 				return "success";
 			} // end try
 			catch (Exception e) {
 				e.printStackTrace();
 				Log.error("new user can not to be saved in DB", e);
+				GWT.log("new user can not to be saved in DB", e);
 			}
 		} else if (methodName.equals("Delete")) {
 			try {
@@ -105,22 +108,26 @@ public class DB_Conn{
 	private void readDBData(){
 		try {
 			pr = new Properties();
-			pr.load(new FileInputStream("D:/db-connect.properties"));//for local version
-//			pr.load(new FileInputStream("/var/lib/tomcat6/webapps/OpenCloudConfigurator/WEB-INF/properties/db-connect.properties"));
+//			pr.load(new FileInputStream("D:/db-connect.properties"));//for local version
+			pr.load(new FileInputStream("/var/lib/tomcat6/webapps/OpenCloudConfigurator/WEB-INF/properties/db-connect.properties"));
 			dbUrl = pr.getProperty("dbUrl");
 			dbClass  = pr.getProperty("dbClass");
 			tableName = pr.getProperty("tableName");
 			dbLogin = pr.getProperty("dbLogin");
 			dbPWD = pr.getProperty("dbPWD");
-			Log.info("reading  a data from db-connect.properties was successful");
+			Log.info("reading a data from db-connect.properties was successful");
+			GWT.log("reading a data from db-connect.properties was successful");
 		} catch (FileNotFoundException e) {
 			Window.alert("db-connect .properties file not found.");
 			e.printStackTrace();
 			Log.error("db-connect .properties file not found.", e);
+			GWT.log("db-connect .properties file not found.", e);
 		} catch (IOException e) {
 			Window.alert("Problem with readDBData method");
+			GWT.log("Problem with readDBData method");
 			e.printStackTrace();
 			Log.error("Problem with readDBData method", e);
+			GWT.log("Problem with readDBData method", e);
 		} 
 	}
 

@@ -12,6 +12,7 @@ import com.gwtplatform.mvp.client.DelayedBindRegistry;
 
 /**
  * Main class with EntryPoint.
+ * Log-Komponente wird von http://code.google.com/p/gwt-log/ benutzt.
  * @author Bagautdinov
  * @version 1.0
  *
@@ -34,7 +35,6 @@ public class OpenCloudConfigurator implements EntryPoint, ValueChangeHandler<Str
 	     * Install an UncaughtExceptionHandler which will produce <code>FATAL</code> log messages
 	     */
 	    Log.setUncaughtExceptionHandler();
-		
 	    /*
 	     * Use a <code>if (Log.isDebugEnabled()) {...}</code> guard to ensure that
 	     * <code>System.currentTimeMillis()</code> is compiled out when <code>log_level=OFF</code>, or
@@ -43,7 +43,8 @@ public class OpenCloudConfigurator implements EntryPoint, ValueChangeHandler<Str
 	    if (Log.isDebugEnabled()) {
 	      startTimeMillis = System.currentTimeMillis();
 	    }
-	    
+	    Log.debug("OCC is running");
+	    Log.setCurrentLogLevel(Log.LOG_LEVEL_DEBUG);
 		initHistoryObservations();
 		// This is required for Gwt-Platform proxy's generator
 		DelayedBindRegistry.bind(ginjector);

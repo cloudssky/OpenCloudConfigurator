@@ -4,6 +4,7 @@ import org.opencmp.occ.client.place.NameTokens;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.Presenter;
@@ -28,6 +29,11 @@ public class CloudPresenter extends Presenter<CloudPresenter.MyView, CloudPresen
 		public Label getErrorLabel();
 		public void setErrorLabel(Label errorLabel);
 		public TextBox getHddValue();
+		public ListBox getServerRegionListBox();
+		public void setServerRegionListBox(ListBox serverRegionListBox);
+		public ListBox getCloudAppsListBox();
+		public void setCloudAppsListBox(ListBox cloudAppsListBox);
+		
 	}
 
 	@ProxyCodeSplit

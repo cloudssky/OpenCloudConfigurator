@@ -4,10 +4,9 @@ import org.opencmp.occ.client.cloudservice.slider.SliderBar;
 import org.opencmp.occ.client.cloudservice.slider.SliderBar.LabelFormatter;
 
 import com.allen_sauer.gwt.log.client.Log;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.http.client.Request;
 import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestCallback;
@@ -18,9 +17,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ChangeListener;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HTMLPanel;
-import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -31,7 +28,8 @@ import com.gwtplatform.mvp.client.ViewImpl;
 /**
  * Diese Klasse stellt ein CloudSizer-View zusammen. MailSlideBar wird von
  * http://code.google.com/p/gwt-slider-bar/ benutzt.
- * This class puts together a CloudSizer view. Copyright http://code.google.com/p/gwt-slider-bar/
+ * Log-Komponente wird von http://code.google.com/p/gwt-log/ benutzt.
+ * This class puts together a CloudSizer view. MailSlideBar is used by http://code.google.com/p/gwt-slider-bar/
  * 
  * @author Bagautdinov
  * @version 1.0
@@ -39,18 +37,15 @@ import com.gwtplatform.mvp.client.ViewImpl;
 @SuppressWarnings("deprecation")
 public class CloudOldView extends ViewImpl implements CloudOldPresenter.MyView {
 	
-	private static String html = "<div id=logoText><img src=\"./image/CloudSizerLogo.png\">OpenCloudConfigurator</div>";
+//	private static String html = "<div id=logoText><img src=\"./image/CloudSizerLogo.png\">OpenCloudConfigurator</div>"; // mit Logo-Bild
+	private static String html = "<div class=\"titleName\">OpenCloudConfigurator</div>";
 	private final HTMLPanel panel = new HTMLPanel(html);
 
 	final TextBox cpuBox;
 	final TextBox ramBox;
 	final TextBox hddBox;
 	final TextBox priceBox;
-	final RadioButton locate;
-	final RadioButton locate2;
-	final RadioButton locate3;
-	final RadioButton locate4;
-	String countryLocation = "Germany";
+	ListBox serverLocateListBox;	
 	ListBox cloudAppsListBox;	
 	private String[] temp;
 	
@@ -88,17 +83,17 @@ public class CloudOldView extends ViewImpl implements CloudOldPresenter.MyView {
 		hddBox.setReadOnly(true);
 		priceBox = new TextBox();
 		priceBox.setReadOnly(true);
-		locate = new RadioButton("country", "Europe");
-		locate.setChecked(true);// Punkt auf Germany setzen
-		locate2 = new RadioButton("country", "US North");
-		locate3 = new RadioButton("country", "Middle East");
-		locate4 = new RadioButton("country", "Asia Pacific");
-		
+		loadServerLocate();
 		loadCloudAppsList();
 		
-		//appListbox.setSelectedIndex(0);
-	    // anzahl der sichbaren Elementen
-//		appListbox.setVisibleItemCount(5);
+		serverLocateListBox.addChangeHandler(new ChangeHandler() {
+			
+			@Override
+			public void onChange(ChangeEvent event) {
+				serverLocateListBox.setSelectedIndex(serverLocateListBox.getSelectedIndex());
+				
+			}
+		});
 		cloudAppsListBox.addChangeHandler(new ChangeHandler() {
 			  @Override
 		      public void onChange(ChangeEvent event) {
@@ -118,6 +113,7 @@ public class CloudOldView extends ViewImpl implements CloudOldPresenter.MyView {
 		mainSliderBar.setCurrentValue(0);
 		mainSliderBar.setNumTicks(MAX_VALUE);
 		mainSliderBar.setNumLabels(8);
+//		mainSliderBar.setStyleName("slider");
 		// bei Verschieben wird sich Wert(CPU) aendern
 		mainSliderBar.addChangeListener(new ChangeListener() {
 			public void onChange(Widget sender) {
@@ -144,13 +140,17 @@ public class CloudOldView extends ViewImpl implements CloudOldPresenter.MyView {
 						+ "");
 			}
 		});
-		// html = html + "<div id=\"supertest\"> <h2> bla </h2> ";
-		VerticalPanel vpanel = new VerticalPanel();
+		// Add slideBar to page
+		panel.add(mainSliderBar);
+//		html ="<div id=\"supertest\"> <h2> bla </h2> <div class=\"clear\"></div>";
+//		panel.add(new HTMLPanel(html));
+		//		VerticalPanel vpanel = new VerticalPanel();
+//		vpanel.setStyleName("vpanel");
 		// Place everything in a nice looking grid
 		Grid grid = new Grid(2, 6);
 		grid.setStyleName("gridSizer");
-		grid.setBorderWidth(1);
-		grid.setCellPadding(3);
+		grid.setBorderWidth(0);
+		grid.setCellPadding(2);
 
 		// The type of text to display
 		// final HTML defaultTextLabel = new HTML("custom");
@@ -180,78 +180,62 @@ public class CloudOldView extends ViewImpl implements CloudOldPresenter.MyView {
 		grid.setWidget(1, 3, priceBox);
 
 		// Country-Position mit Startwert default location=Germany
-		locate.addClickHandler(new ClickHandler() {
-
-			@Override
-			public void onClick(ClickEvent event) {
-				countryLocation = "Germany";
-
-			}
-		});
-		// Country-Position mit Startwert
-		locate2.addClickHandler(new ClickHandler() {
-
-			@Override
-			public void onClick(ClickEvent event) {
-				countryLocation = "US North";
-
-			}
-		});
-		locate3.addClickHandler(new ClickHandler() {
-
-			@Override
-			public void onClick(ClickEvent event) {
-				countryLocation = "Middle East";
-
-			}
-		});
-		locate4.addClickHandler(new ClickHandler() {
-
-			@Override
-			public void onClick(ClickEvent event) {
-				countryLocation = "Asia Pacific";
-
-			}
-		});
 		grid.setHTML(0, 4, "Server-Region");
-		VerticalPanel panelLocation = new VerticalPanel();
-		panelLocation.add(locate);
-		panelLocation.add(locate2);
-		panelLocation.add(locate3);
-		panelLocation.add(locate4);
-		grid.setWidget(1, 4, panelLocation);
+		grid.setWidget(1, 4, serverLocateListBox);
 		//fuegen von CloudApps-Elementen(Liste)
 		grid.setHTML(0, 5, "Cloud Apps");
 		grid.setWidget(1, 5, cloudAppsListBox);
 		// Add elements to page
-		// panel.add(mainSliderBar, "mainSliderBar");
-		// mainSliderBar.setStyleName("supertest");
-		vpanel.add(mainSliderBar);
-		vpanel.setCellHorizontalAlignment(mainSliderBar,
-				HasHorizontalAlignment.ALIGN_CENTER);
-		// panel.add(grid);
-		vpanel.add(grid);
-		vpanel.setCellHorizontalAlignment(grid,
-				HasHorizontalAlignment.ALIGN_CENTER);
-		// panel.add(errorLabel, "errorLabelContainer");
-		// html = html + "</div>";
+		panel.add(grid);
 		// We can add style names to widgets
-		registrationButton.addStyleName("registrationButton");
-		// panel.add(registrationButton, "registrationButtonContainer");
+		registrationButton.addStyleName("next-Button");
 		TextBox info = new TextBox();
-		info.setVisibleLength(22);
+		info.setReadOnly(true);
+		info.setVisibleLength(17);
 		info.setText("* Free 30-day Trial");
+		info.setStyleName("smallText");
+		VerticalPanel vpanel = new VerticalPanel();
+		vpanel.setSpacing(3);
+		vpanel.setStyleName("vpanel");
 		vpanel.add(info);
 		vpanel.add(registrationButton);
-		vpanel.setCellHorizontalAlignment(registrationButton,
-				HasHorizontalAlignment.ALIGN_CENTER);
 		panel.add(vpanel);
+	}
+	
+	/**
+	 * Diese Methode liest zeilenweise Server-Location aus serverlocation.properties Datei(war-Ordner) und speichert die in einer Liste.
+	 */
+	private void loadServerLocate() {
+		temp = null;
+		serverLocateListBox = new ListBox(false);
+		RequestBuilder requestBuilder = new RequestBuilder( RequestBuilder.GET, "serverlocation.properties");
+        try {
+            requestBuilder.sendRequest(null, new RequestCallback(){
+                public void onError(Request request, Throwable exception) {
+                    Window.alert("failed file reading" + exception);
+                	GWT.log( "failed file reading", exception);
+                    Log.error("failed file reading", exception);
+                }
+				
+				@Override
+				public void onResponseReceived(Request request,	Response response) {
+					temp = response.getText().split("\n");
+					for(String str :temp){
+						serverLocateListBox.addItem(str);
+					}
+				}} );
+        } catch (RequestException exception) {
+        	Window.alert("failed file reading" + exception);
+            GWT.log( "failed file reading", exception );
+            Log.error("failed file reading", exception);
+        }
 	}
 
 	/**
 	 * Diese Methode liest zeilenweise Cloud Apps-Namen aus cloud-apps.properties Datei(war-Ordner) und speichert die in einer Liste.
 	 */
 	private void loadCloudAppsList() {
+		temp = null;
 		cloudAppsListBox = new ListBox(false);
 		
 		RequestBuilder requestBuilder = new RequestBuilder( RequestBuilder.GET, "cloud-apps.properties");
@@ -259,7 +243,7 @@ public class CloudOldView extends ViewImpl implements CloudOldPresenter.MyView {
             requestBuilder.sendRequest(null, new RequestCallback(){
                 public void onError(Request request, Throwable exception) {
                     Window.alert("failed file reading" + exception);
-//                	GWT.log( "failed file reading", exception);
+                	GWT.log( "failed file reading", exception);
                     Log.error("failed file reading", exception);
                 }
 				
@@ -272,10 +256,9 @@ public class CloudOldView extends ViewImpl implements CloudOldPresenter.MyView {
 				}} );
         } catch (RequestException exception) {
         	Window.alert("failed file reading" + exception);
-//            GWT.log( "failed file reading", exception );
+            GWT.log( "failed file reading", exception );
             Log.error("failed file reading", exception);
         }
-		
 	}
 
 	@Override
@@ -311,13 +294,6 @@ public class CloudOldView extends ViewImpl implements CloudOldPresenter.MyView {
 		return priceBox;
 	}
 
-	// /**
-	// * @return the countryLocation
-	// */
-	// public String getCountryLocation() {
-	// return countryLocation;
-	// }
-
 	/**
 	 * Wird ein CloudSizer mit Daten(cpu, ram, hdd, price, location, cloudAppList) gefuehlt
 	 * 
@@ -329,9 +305,9 @@ public class CloudOldView extends ViewImpl implements CloudOldPresenter.MyView {
 		cloudSizer.setRamSize(ramBox.getValue());
 		cloudSizer.setHddSize(hddBox.getValue());
 		cloudSizer.setPriceSize(priceBox.getValue());
-		// cloudSizer.setCloudLocation(getCountryLocation());
-		cloudSizer.setCloudLocation(countryLocation);
-		//gibt zurueck nur ausgewaelte Element
+		//gibt zurueck nur ausgewaelte Element von Server-Locate
+		cloudSizer.setCloudLocation(serverLocateListBox.getItemText(serverLocateListBox.getSelectedIndex()));
+		//gibt zurueck nur ausgewaelte Element von Cloud-Apps
 		cloudSizer.setCloudApps(cloudAppsListBox.getItemText(cloudAppsListBox.getSelectedIndex())); 
 		return cloudSizer;
 	}

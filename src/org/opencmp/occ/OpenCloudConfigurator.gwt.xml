@@ -12,12 +12,14 @@
 	<!-- <inherits name='com.google.gwt.user.theme.chrome.Chrome'/> -->
 	<!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/> -->
 	
+	<inherits name='com.kiouri.sliderbar.SliderBarMVP' />
+	
 	<!-- ****************** for Log ***************************-->
-	<!-- inherits name='com.allen_sauer.gwt.log.gwt-log-DEBUG' /-->
-
+	<inherits name='com.allen_sauer.gwt.log.gwt-log-DEBUG' />
+	<extend-property name="log_level" values="OFF"/>
+	
 	<!-- For development, a default of `DEBUG` is recommended -->
-	<inherits name='com.allen_sauer.gwt.log.gwt-log-OFF' />
-	<extend-property name="log_level" values="INFO"/>
+	<!--inherits name='com.allen_sauer.gwt.log.gwt-log-DEBUG' /-->
 
 	<!-- ****************** SliderBar *************************-->
 	<!-- inherits name='com.kiouri.sliderbar.SliderBarMVP' / -->
